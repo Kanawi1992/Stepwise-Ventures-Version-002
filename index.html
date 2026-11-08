@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12161b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Stepwise">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Stepwise Ventures</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+[hidden]{display:none!important}
+/* Layout: one long page that climbs. Hero with logo, price proof, product, an ordering staircase, contact. */
+:root {
+  --bg: #F6F4EE;
+  --surface: #FFFFFF;
+  --surface-2: #EDEAE0;
+  --fg: #17181B;
+  --muted: #5D5C56;
+  --line: #D9D5C8;
+  --gold: #8F6200;
+  --gold-soft: #F3E3B8;
+  --blue: #0A6FB0;
+  --on-gold: #FFFFFF;
+  --cover-bg: #12161b;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E0F12;
+    --surface: #17191E;
+    --surface-2: #1F2228;
+    --fg: #F3F1EA;
+    --muted: #A9A79E;
+    --line: #2A2D35;
+    --gold: #E8B93F;
+    --gold-soft: #3A2F12;
+    --blue: #35AEF2;
+    --on-gold: #1A1405;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E0F12;
+  --surface: #17191E;
+  --surface-2: #1F2228;
+  --fg: #F3F1EA;
+  --muted: #A9A79E;
+  --line: #2A2D35;
+  --gold: #E8B93F;
+  --gold-soft: #3A2F12;
+  --blue: #35AEF2;
+  --on-gold: #1A1405;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.6; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { width: 100%; max-width: 1080px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+section { padding-block: 36px; }
+.eyebrow { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+h2 { font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 800; margin-bottom: 10px; }
+.lead { color: var(--muted); max-width: 60ch; }
+
+/* header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 1.1rem; text-decoration: none; }
+.brand img { width: 36px; height: 36px; border-radius: 50%; }
+nav { display: flex; gap: 20px; flex-wrap: wrap; }
+nav a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.95rem; }
+nav a:hover { color: var(--fg); }
+
+/* cover */
+.cover { background: var(--cover-bg); }
+.cover img { display: block; margin-inline: auto; width: auto; max-width: 100%; height: auto; max-height: 480px; object-fit: contain;
+  -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 62%, transparent 100%); }
+
+/* hero */
+.hero { padding-block: 44px 56px; }
+.hero-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+.hero h1 { font-size: clamp(2.3rem, 7vw, 4rem); font-weight: 800; margin-bottom: 18px; }
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero p.sub { font-size: 1.1rem; color: var(--muted); max-width: 46ch; margin-bottom: 26px; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 999px; font-weight: 700; font-family: var(--body); font-size: 1rem; text-decoration: none; cursor: pointer; border: 2px solid var(--gold); transition: transform .15s ease; }
+.btn:hover { transform: translateY(-2px); }
+.btn.primary { background: var(--gold); color: var(--on-gold); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+
+/* price proof */
+.proof { background: var(--surface); border-block: 1px solid var(--line); }
+.proof-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 40px; align-items: center; }
+.bars { display: grid; gap: 14px; }
+.bar-row { display: grid; grid-template-columns: 120px 1fr 64px; gap: 12px; align-items: center; font-size: 0.95rem; }
+.bar-row .lbl { color: var(--muted); }
+.track { height: 18px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.fill { height: 100%; border-radius: 999px; background: var(--muted); }
+.fill.us { background: var(--gold); }
+.bar-row b { font-family: var(--display); font-size: 1.1rem; text-align: right; font-variant-numeric: tabular-nums; }
+.bar-row.us .lbl { color: var(--fg); font-weight: 700; }
+.note { font-size: 0.85rem; color: var(--muted); margin-top: 14px; }
+
+/* product */
+.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.stage { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; min-width: 0; }
+.stage img { display: block; width: 100%; height: auto; }
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+.gallery figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; min-width: 0; }
+.gallery img { display: block; width: 100%; height: 180px; object-fit: cover; }
+.gallery figcaption { padding: 14px 16px 16px; font-size: 0.93rem; color: var(--muted); }
+.gallery figcaption b { display: block; color: var(--fg); font-family: var(--display); font-size: 1.05rem; margin-bottom: 2px; }
+.price { font-family: var(--display); font-weight: 800; font-size: 3rem; line-height: 1; margin: 6px 0 18px; }
+.price small { font-size: 1rem; font-weight: 500; color: var(--muted); font-family: var(--body); margin-left: 8px; }
+.specs { width: 100%; border-collapse: collapse; margin-bottom: 22px; }
+.specs th, .specs td { text-align: left; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 0.97rem; vertical-align: top; }
+.specs th { color: var(--muted); font-weight: 500; width: 40%; padding-right: 16px; }
+
+/* ordering staircase */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: end; margin-top: 28px; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; border-top: 4px solid var(--gold); }
+.step:nth-child(1) { min-height: 150px; }
+.step:nth-child(2) { min-height: 190px; }
+.step:nth-child(3) { min-height: 230px; }
+.step .n { font-family: var(--display); font-weight: 800; font-size: 1.6rem; color: var(--gold); margin-bottom: 6px; }
+.step h3 { font-size: 1.2rem; margin-bottom: 6px; }
+.step p { color: var(--muted); font-size: 0.95rem; }
+
+/* message builder */
+.builder { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.builder h3 { font-size: 1.4rem; margin-bottom: 6px; }
+.fields { display: grid; gap: 14px; margin-top: 16px; }
+label { display: grid; gap: 6px; font-size: 0.88rem; font-weight: 700; }
+input, select, textarea { font-family: var(--body); font-size: 1rem; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-height: 46px; width: 100%; }
+textarea { min-height: 150px; resize: vertical; line-height: 1.5; }
+.total { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-top: 1px solid var(--line); margin-top: 4px; }
+.total b { font-family: var(--display); font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+.out { display: grid; gap: 12px; align-content: start; }
+.status { min-height: 1.4em; font-size: 0.9rem; color: var(--blue); font-weight: 700; }
+.small { font-size: 0.85rem; color: var(--muted); }
+
+.bank { border: 1px solid var(--gold); background: var(--gold-soft); border-radius: 14px; padding: 16px; display: grid; gap: 10px; }
+.bank h4 { margin: 0; font-family: var(--display); font-size: 1.05rem; }
+.bank dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 0.95rem; }
+.bank dt { color: var(--muted); }
+.bank dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+
+.items { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; min-width: 0; }
+.items legend { font-size: 0.88rem; font-weight: 700; padding: 0; margin-bottom: 4px; }
+label.item { grid-template-columns: 1fr 88px; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); font-weight: 500; }
+label.item b { display: block; font-size: 0.95rem; }
+label.item small { color: var(--muted); font-size: 0.85rem; }
+label.item select { min-height: 40px; padding: 8px 10px; }
+
+.picker { border: 0; padding: 0; margin: 0; display: grid; gap: 12px; min-width: 0; }
+.picker legend { font-size: 0.88rem; font-weight: 700; padding: 0; margin-bottom: 4px; }
+.opt { font-family: var(--body); font-size: 0.95rem; font-weight: 700; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; min-height: 46px; cursor: pointer; text-align: left; display: inline-flex; flex-direction: column; justify-content: center; }
+.opt small { color: var(--muted); font-weight: 500; font-size: 0.8rem; }
+.opt:hover { border-color: var(--gold); }
+.opt[aria-pressed="true"], .opt[aria-expanded="true"] { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+.opt[aria-pressed="true"] small, .opt[aria-expanded="true"] small { color: var(--on-gold); }
+.opt.big { width: 100%; flex-direction: row; align-items: center; justify-content: space-between; font-size: 1.05rem; min-height: 52px; }
+.opt.big::after { content: "+"; font-size: 1.4rem; line-height: 1; }
+.opt.big[aria-expanded="true"]::after { content: "\2013"; }
+.seg { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.seg .opt { flex: 1 1 150px; }
+.seg select { width: 92px; }
+.hint { font-size: 0.85rem; color: var(--muted); margin: 0 0 6px; }
+.btn.sm { min-height: 44px; padding: 0 18px; font-size: 0.95rem; }
+.cart { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.cart li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); font-size: 0.95rem; }
+.cart li { flex-wrap: wrap; }
+.cart .c-name { flex: 1 1 100%; font-weight: 600; }
+.stepper { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); overflow: hidden; }
+.stepper button { width: 46px; height: 46px; border: 0; background: transparent; color: var(--fg); font-size: 1.5rem; line-height: 1; cursor: pointer; }
+.stepper button:hover { background: var(--gold); color: var(--on-gold); }
+.stepper input { width: 46px; height: 46px; border: 0; border-inline: 1px solid var(--line); background: transparent; color: var(--fg); text-align: center; font: 700 1.05rem var(--body); padding: 0; }
+.stepper.sm button { width: 40px; height: 40px; font-size: 1.3rem; }
+.stepper .q-n { min-width: 40px; text-align: center; font-weight: 700; border-inline: 1px solid var(--line); line-height: 40px; }
+.cart li.empty { color: var(--muted); border-style: dashed; }
+
+.pcards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; align-items: start; }
+.pcard { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; min-width: 0; }
+.ptoggle { all: unset; box-sizing: border-box; display: block; width: 100%; cursor: pointer; }
+.ptoggle:focus-visible { outline: 3px solid var(--gold); outline-offset: -3px; }
+.ptoggle img { display: block; width: 100%; height: 200px; object-fit: cover; }
+.ptoggle img { height: auto; aspect-ratio: 9 / 5; }
+.pmeta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 18px 2px; font-family: var(--display); font-size: 1.1rem; }
+.pp { font-weight: 800; font-size: 1.4rem; }
+.ptap { display: block; padding: 0 18px 16px; color: var(--gold); font-size: 0.88rem; font-weight: 600; }
+.ptap::after { content: " +"; }
+.ptoggle[aria-expanded="true"] .ptap::after { content: " \2013"; }
+.soon { display: inline-block; margin: 6px 18px 0; padding: 4px 12px; border-radius: 999px; background: var(--gold); color: var(--on-gold); font-size: 0.8rem; font-weight: 700; }
+.pdetail { padding: 10px 16px 14px; border-top: 1px solid var(--line); }
+.pdetail .specs { margin: 6px 0 12px; }
+.pdetail .specs th, .pdetail .specs td { padding: 6px 0; font-size: 0.9rem; line-height: 1.3; }
+.pdetail .specs th { width: 36%; padding-right: 10px; }
+.pdetail .lead { font-size: 0.93rem; line-height: 1.4; margin-bottom: 6px !important; }
+.pdetail .btn { min-height: 44px; padding: 0 20px; }
+.mini { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 12px; }
+.mini.two { grid-template-columns: repeat(2, 1fr); }
+.mini figure { margin: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; min-width: 0; }
+.mini img { display: block; width: 100%; height: 84px; object-fit: cover; }
+.mini figcaption { padding: 6px 8px 8px; font-size: 0.75rem; line-height: 1.3; color: var(--muted); }
+.mini figcaption b { display: block; color: var(--fg); font-size: 0.85rem; }
+@media (max-width: 760px) { .pcards { grid-template-columns: 1fr; } .mini { grid-template-columns: repeat(3, 1fr); } .mini.two { grid-template-columns: 1fr 1fr; } }
+
+.pricecheck { margin: 4px 0 12px; padding: 10px 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 14px; }
+.pricecheck .bars { gap: 8px; }
+.pricecheck .bar-row { grid-template-columns: 92px 1fr 52px; gap: 8px; font-size: 0.85rem; }
+.pricecheck .bar-row b { font-size: 1rem; }
+.pricecheck .note { font-size: 0.8rem; margin-top: 8px; }
+.pricecheck h3 { font-family: var(--display); font-size: 1.05rem; margin: 0 0 6px; }
+
+.wa-fab { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 20; display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 20px; border-radius: 999px; background: #1E8E4E; color: #fff; font-weight: 700; text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+.wa-fab:hover { background: #17753f; }
+@media print { .wa-fab { display: none; } }
+.contact-list { display: grid; gap: 12px; margin-top: 22px; max-width: 520px; }
+.c-row { display: flex; align-items: center; gap: 14px; padding: 12px 14px; min-height: 64px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg); text-decoration: none; color: var(--fg); }
+.c-row:hover { border-color: var(--gold); }
+.c-txt { display: grid; min-width: 0; }
+.c-txt b { font-family: var(--display); font-size: 1.05rem; }
+.c-txt small { color: var(--muted); font-size: 0.92rem; overflow-wrap: anywhere; }
+.c-ico { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; }
+.c-ico svg { width: 24px; height: 24px; }
+.c-ico.wa { background: #1E8E4E; } .c-ico.ph { background: #0A6FB0; } .c-ico.ml { background: #8F6200; }
+.c-ico.fb { background: #1877F2; } .c-ico.ig { background: linear-gradient(45deg, #F58529, #DD2A7B 55%, #8134AF); }
+.c-ico.tt { background: #111; } .c-ico.th { background: #222; }
+.c-head { font-family: var(--display); font-size: 1.1rem; margin: 20px 0 10px; }
+.social-icons { display: flex; flex-wrap: wrap; gap: 20px; }
+.social-icons a { display: grid; justify-items: center; gap: 6px; text-decoration: none; color: var(--fg); min-width: 64px; }
+.social-icons .c-ico { width: 54px; height: 54px; }
+.social-icons .c-ico svg { width: 28px; height: 28px; }
+.social-icons a:hover .c-ico { transform: translateY(-2px); }
+.social-icons small { font-size: 0.85rem; color: var(--muted); }
+.ptoggle img, .mini img { cursor: zoom-in; }
+.zoom { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.92); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 56px 12px 24px; }
+.zoom img { max-width: 100%; max-height: calc(100vh - 140px); object-fit: contain; border-radius: 8px; cursor: zoom-out; }
+.zoom p { color: #ddd; font-size: 0.9rem; text-align: center; margin: 0; max-width: 60ch; }
+.zoom-close { position: absolute; top: 10px; right: 12px; width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(255,255,255,.15); color: #fff; font-size: 2rem; line-height: 1; cursor: pointer; }
+.zoom img { touch-action: pan-y; cursor: default; user-select: none; -webkit-user-drag: none; }
+.zoom-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 56px; border: 0; border-radius: 12px; background: rgba(255,255,255,.15); color: #fff; font-size: 2.2rem; line-height: 1; cursor: pointer; z-index: 2; }
+.zoom-nav.prev { left: 6px; } .zoom-nav.next { right: 6px; }
+.zoom-nav:hover { background: rgba(255,255,255,.3); }
+.zoom-dots { display: flex; gap: 8px; min-height: 8px; }
+.zoom-dots i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.35); transition: background .2s, transform .2s; }
+.zoom-dots i.on { background: #fff; transform: scale(1.3); }
+.zoom-close:hover { background: rgba(255,255,255,.3); }
+.soon-card { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--gold); border-radius: 18px; padding: 18px 18px 20px; }
+.soon-card h2 { margin-bottom: 6px; }
+.loan-steps { margin: 12px 0; padding: 0; list-style: none; counter-reset: ls; display: grid; gap: 8px; }
+.loan-steps li { counter-increment: ls; position: relative; padding-left: 38px; font-size: 0.95rem; color: var(--muted); }
+.loan-steps li::before { content: counter(ls); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--gold); color: var(--on-gold); font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; }
+.loan-steps b { color: var(--fg); }
+.soon-card .small { margin: 0 0 14px; }
+.nav-loan { color: var(--gold); font-weight: 700; }
+footer a { color: var(--gold); font-weight: 600; }
+#seg-type { flex-direction: column; flex-wrap: nowrap; align-items: stretch; }
+#seg-type > .opt { flex: 0 0 auto; }
+.sub-in { margin: -2px 0 2px 18px; padding-left: 12px; border-left: 3px solid var(--gold); }
+.sub-in .hint { margin: 2px 0 6px; }
+.sub-in .seg .opt { flex: 1 1 100px; min-height: 42px; }
+/* payments + contact */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
+.chips li { padding: 9px 16px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); font-weight: 500; }
+.chips li.main { background: var(--gold-soft); border-color: var(--gold); color: var(--fg); font-weight: 700; }
+.contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; min-width: 0; }
+.card h3 { font-size: 1.1rem; margin-bottom: 10px; }
+.val { font-family: var(--display); font-weight: 700; font-size: 1.35rem; overflow-wrap: anywhere; user-select: all; margin-bottom: 12px; }
+.val.sm { font-size: 1.05rem; }
+.copy { font-family: var(--body); font-size: 0.9rem; font-weight: 700; color: var(--fg); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; min-height: 40px; cursor: pointer; }
+.copy:hover { border-color: var(--gold); }
+.social { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.social li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+.social span:first-child { color: var(--muted); }
+.social a { color: var(--gold); font-weight: 700; }
+
+footer { border-top: 1px solid var(--line); padding-block: 28px 36px; color: var(--muted); font-size: 0.9rem; }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 820px) {
+  section { padding-block: 28px; }
+  .hero-grid, .proof-grid, .prod-grid, .builder { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .step:nth-child(n) { min-height: 0; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; }
+  .bar-row { grid-template-columns: 96px 1fr 58px; }
+}
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a class="brand" href="#top"><img src="logo.png" alt="" width="36" height="36"><span>Stepwise Ventures</span></a>
+  <nav aria-label="Main">
+    <a href="#products">Products</a>
+    <a href="#about">About</a>
+    <a href="#order">Order</a>
+    <a href="#contact">Contact</a>
+    <a href="lending.html" class="nav-loan">Loans</a>
+  </nav>
+</header>
+
+<div class="cover"><img src="cover.jpg" alt="Stepwise Ventures logo: rising metallic bars with a gold arrow and the line Growing one step at a time" width="1264" height="843"></div>
+
+<main id="top">
+  <section id="about" style="padding-block: 24px 8px;">
+    <div class="wrap">
+      <p class="eyebrow">About us</p>
+      <h1 style="font-size: clamp(1.9rem, 4vw, 2.6rem); margin-bottom: 8px;">Stepwise Ventures</h1>
+      <p class="lead" style="font-size: 1.08rem;">Stepwise Ventures is a Port Moresby-based online business offering carefully selected, genuine products. Customers can order easily and pay by cash or bank transfer. We deliver free of charge to our central locations, Vision City and Waigani Central. For addresses outside these areas, contact us to arrange delivery for a small fee.</p>
+    </div>
+  </section>
+
+
+  <section id="products">
+    <div class="wrap">
+      <p class="eyebrow">Our products</p>
+      <h2>Tap a product to see more.</h2>
+      <div class="pcards">
+        <article class="pcard" id="wallet">
+          <button class="ptoggle" type="button" aria-expanded="false" aria-controls="d-wallet">
+            <img src="wallet-main.jpg" alt="Black carbon-fibre look Dienqi RFID wallet with cards fanned out of the slider" width="843" height="454">
+            <span class="pmeta"><b>Dienqi RFID wallet</b><span class="pp">K50</span></span>
+            <span class="ptap">Tap for photos and details</span>
+          </button>
+          <div class="pdetail" id="d-wallet" hidden>
+            <p class="lead" style="margin-bottom:12px;">Slim black wallet with a carbon-fibre look and RFID protection. Free delivery in Vision City and Waigani Central.</p>
+            <table class="specs">
+              <tr><th scope="row">Colour</th><td>Black</td></tr>
+              <tr><th scope="row">Finish</th><td>Carbon-fibre look</td></tr>
+              <tr><th scope="row">Holds</th><td>7 or more cards</td></tr>
+              <tr><th scope="row">Cash slot</th><td>Yes</td></tr>
+              <tr><th scope="row">Protection</th><td>RFID protection</td></tr>
+              <tr><th scope="row">Style</th><td>Slim and lightweight</td></tr>
+            </table>
+            <div class="mini">
+              <figure><img src="detail-slots.jpg" alt="Open wallet showing card slots and a cash pocket"><figcaption><b>Card slots</b>Up to 7 cards plus extra pockets.</figcaption></figure>
+              <figure><img src="detail-carbon.jpg" alt="Closed black carbon-fibre look wallet"><figcaption><b>Carbon fibre look</b>Stylish and durable.</figcaption></figure>
+              <figure><img src="detail-cash.jpg" alt="Wallet with cards and a cash slot"><figcaption><b>Cash slot</b>Keep cash safe and organised.</figcaption></figure>
+            </div>
+            <div class="pricecheck">
+              <h3>Price check: you pay up to K60 less</h3>
+              <p class="note" style="margin:0 0 10px;">Other online sellers charge K60 to K100 for the same kind of RFID wallet, plus K10 delivery. We charge K50 and nothing for delivery in our free zones.</p>
+              <div class="bars" role="img" aria-label="Delivered price: Stepwise Ventures K50, other sellers K70 to K110">
+                <div class="bar-row us"><span class="lbl">Stepwise Ventures</span><div class="track"><div class="fill us" style="width:45.45%"></div></div><b>K50</b></div>
+                <div class="bar-row"><span class="lbl">Other sellers, low</span><div class="track"><div class="fill" style="width:63.64%"></div></div><b>K70</b></div>
+                <div class="bar-row"><span class="lbl">Other sellers, high</span><div class="track"><div class="fill" style="width:100%"></div></div><b>K110</b></div>
+              </div>
+              <p class="note">Delivered price per RFID wallet in kina. Other sellers as listed online in November 2026.</p>
+            </div>
+            <a class="btn primary" href="#order">Order this wallet</a>
+          </div>
+        </article>
+
+        <article class="pcard" id="cardholder">
+          <button class="ptoggle" type="button" aria-expanded="false" aria-controls="d-card">
+            <img src="cardholders.jpg" alt="Two executive business card holders, one maroon and one blue, with stainless steel frames" width="640" height="455">
+            <span class="pmeta"><b>Executive metal card holder</b><span class="pp">K15</span></span>
+            <span class="ptap">Tap for photos and details</span>
+          </button>
+          <div class="pdetail" id="d-card" hidden>
+            <p class="lead" style="margin-bottom:12px;">Stainless steel business card holder with a PU finish. A fashionable, professional accessory, and a custom logo can be added.</p>
+            <table class="specs">
+              <tr><th scope="row">Colours</th><td>Maroon or blue</td></tr>
+              <tr><th scope="row">Material</th><td>Stainless steel with PU cover</td></tr>
+              <tr><th scope="row">Finish</th><td>Brushed metal, velvet PU</td></tr>
+              <tr><th scope="row">Custom logo</th><td>Available, ask us on WhatsApp</td></tr>
+              <tr><th scope="row">Privacy</th><td>Keeps your cards secure and private</td></tr>
+            </table>
+            <div class="mini two">
+              <figure><img src="cardholder-open.jpg" alt="Open stainless steel card holder with a velvet lining, holding a bank card and a pen"><figcaption><b>Velvet lining</b>Inside view with a card and pen.</figcaption></figure>
+              <figure><img src="cardholders.jpg" alt="Maroon and blue metal card holders"><figcaption><b>Maroon or blue</b>Choose your colour when you order.</figcaption></figure>
+            </div>
+            <a class="btn primary" href="#order">Order a card holder</a>
+          </div>
+        </article>
+        <article class="pcard" id="slimholder">
+          <button class="ptoggle" type="button" aria-expanded="false" aria-controls="d-slim">
+            <img src="slim-wide.jpg" alt="Slim black card holder with a steel plate, 9.6 cm by 6.5 cm" width="810" height="450">
+            <span class="pmeta"><b>Slim card holder</b><span class="pp">K15</span></span>
+            <span class="ptap">Tap for photos and details</span>
+          </button>
+          <div class="pdetail" id="d-slim" hidden>
+            <p class="lead" style="margin-bottom:12px;">A thin, minimalist card holder in black PU with a stainless steel plate. Slim enough for a pocket or bag, with a curved lid that closes over your cards.</p>
+            <table class="specs">
+              <tr><th scope="row">Colour</th><td>Black</td></tr>
+              <tr><th scope="row">Material</th><td>Stainless steel with PU cover</td></tr>
+              <tr><th scope="row">Size</th><td>9.6 cm x 6.5 cm</td></tr>
+              <tr><th scope="row">Style</th><td>Thin and minimalist</td></tr>
+              <tr><th scope="row">Holds</th><td>Business cards and credit cards</td></tr>
+            </table>
+            <div class="mini two">
+              <figure><img src="slim-open.jpg" alt="Open slim card holder showing the black lining and steel interior"><figcaption><b>Inside view</b>Black lining, steel interior.</figcaption></figure>
+              <figure><img src="slim-closed.jpg" alt="Closed slim card holder with size marked 9.6 cm by 6.5 cm"><figcaption><b>Size</b>9.6 cm x 6.5 cm.</figcaption></figure>
+            </div>
+            <a class="btn primary" href="#order">Order this card holder</a>
+          </div>
+        </article>
+
+        <article class="pcard" id="sofa">
+          <button class="ptoggle" type="button" aria-expanded="false" aria-controls="d-sofa">
+            <img src="sofa-main.jpg" alt="Inflatable air sofa chairs with matching ottomans in six colours" width="720" height="400">
+            <span class="pmeta"><b>Inflatable air sofa and ottoman</b><span class="pp">K150</span></span>
+            <span class="ptap">Tap for photos and details</span>
+          </button>
+          <div class="pdetail" id="d-sofa" hidden>
+            <p class="lead" style="margin-bottom:12px;">Foldable inflatable lounger set with a matching ottoman, made for the home, patio and camping. A soft, velvety top sits on a durable base, and it deflates quickly so it packs away when you are done.</p>
+            <table class="specs">
+              <tr><th scope="row">Set</th><td>1 sofa chair and 1 ottoman</td></tr>
+              <tr><th scope="row">Chair size</th><td>125 cm x 105 cm</td></tr>
+              <tr><th scope="row">Ottoman</th><td>62 cm wide, 31 cm high</td></tr>
+              <tr><th scope="row">Colours</th><td>Beige, navy, sky blue, orange, red, purple. Ask us which are in stock.</td></tr>
+              <tr><th scope="row">Valve</th><td>Two-layer air valve: inflates with an anti-leak air lock and opens fully for quick deflation</td></tr>
+              <tr><th scope="row">Use</th><td>Home, patio, courtyard, camping, beach and poolside</td></tr>
+              <tr><th scope="row">Ottoman use</th><td>Footstool, or a small table for books, magazines and your phone</td></tr>
+              <tr><th scope="row">Storage</th><td>Foldable when deflated</td></tr>
+            </table>
+            <div class="mini">
+              <figure><img src="sofa-colours.jpg" alt="Six colours of inflatable sofa chair and ottoman sets on a rug"><figcaption><b>Colour range</b>Six colours pictured.</figcaption></figure>
+              <figure><img src="sofa-ottoman.jpg" alt="Inflatable ottoman used as a footstool"><figcaption><b>Ottoman</b>Footstool or small table.</figcaption></figure>
+              <figure><img src="sofa-valve.jpg" alt="Two-layer air valve for inflating and quick deflating"><figcaption><b>Two-layer valve</b>Anti-leak and quick deflate.</figcaption></figure>
+            </div>
+            <a class="btn primary" href="#order">Order this set</a>
+          </div>
+        </article>
+
+        <article class="pcard" id="bag">
+          <button class="ptoggle" type="button" aria-expanded="false" aria-controls="d-bag">
+            <img src="bag-main.jpg" alt="Woven-look tote bag in brown and black, each with a matching small pouch charm" width="810" height="450">
+            <span class="pmeta"><b>Woven-look tote bag</b><span class="pp">K35</span></span>
+            <span class="ptap">Tap for photos and details</span>
+          </button>
+          <div class="pdetail" id="d-bag" hidden>
+            <p class="lead" style="margin-bottom:12px;">A roomy everyday tote in textured faux leather with a woven finish, comes with a matching small pouch charm clipped to the strap. Open top and long handles make it easy to carry to work, school, church or the market.</p>
+            <table class="specs">
+              <tr><th scope="row">Colours</th><td>Brown and black only</td></tr>
+              <tr><th scope="row">Material</th><td>Textured PU faux leather</td></tr>
+              <tr><th scope="row">Style</th><td>Open-top tote with two shoulder handles</td></tr>
+              <tr><th scope="row">Includes</th><td>Matching small pouch charm</td></tr>
+              <tr><th scope="row">Use</th><td>Work, study, shopping and everyday carry</td></tr>
+            </table>
+            <div class="mini two">
+              <figure><img src="bag-brown.jpg" alt="Brown woven-look tote bag with matching pouch charm"><figcaption><b>Brown</b>Warm tan-brown.</figcaption></figure>
+              <figure><img src="bag-black.jpg" alt="Black woven-look tote bag with matching pouch charm"><figcaption><b>Black</b>Classic black.</figcaption></figure>
+            </div>
+            <a class="btn primary" href="#order">Order this bag</a>
+          </div>
+        </article>
+
+        <article class="pcard" id="watch">
+          <button class="ptoggle" type="button" aria-expanded="false" aria-controls="d-watch">
+            <img src="watch-front.jpg" alt="Forsining skeleton watch with a black dial, gold case and roman numerals" width="720" height="547">
+            <span class="pmeta"><b>Forsining skeleton watch</b><span class="pp">K200</span></span>
+            <span class="soon">New item, coming soon</span>
+            <span class="ptap">Tap for photos and details</span>
+          </button>
+          <div class="pdetail" id="d-watch" hidden>
+            <p class="lead" style="margin-bottom:12px;"><b>Coming soon.</b> Mechanical skeleton watch with a 3D hollow-engraved dial, black and golden case and a leather strap. You can see the movement working through the dial and the transparent case back.</p>
+            <table class="specs">
+              <tr><th scope="row">Brand</th><td>Forsining</td></tr>
+              <tr><th scope="row">Movement</th><td>Mechanical, skeleton design</td></tr>
+              <tr><th scope="row">Dial</th><td>3D hollow engraving, roman numerals</td></tr>
+              <tr><th scope="row">Case</th><td>Black and golden</td></tr>
+              <tr><th scope="row">Case back</th><td>Transparent with carving, stainless steel</td></tr>
+              <tr><th scope="row">Strap</th><td>Leather</td></tr>
+              <tr><th scope="row">Water</th><td>Water resistant (marked on case back)</td></tr>
+              <tr><th scope="row">How it works</th><td>Pay first, then we place your order</td></tr>
+              <tr><th scope="row">Delivery time</th><td>3 to 4 weeks</td></tr>
+            </table>
+            <div class="mini two">
+              <figure><img src="watch-engraving.jpg" alt="Forsining watch showing 3D hollow engraving"><figcaption><b>3D hollow engraving</b>Gold movement visible through the dial.</figcaption></figure>
+              <figure><img src="watch-back.jpg" alt="Transparent case back with carving"><figcaption><b>Transparent case back</b>Carved, with stainless steel back.</figcaption></figure>
+            </div>
+            <div class="pricecheck">
+              <h3>Price check: you pay K1,300 less</h3>
+              <p class="note" style="margin:0 0 10px;">Jacks of PNG currently sells a pulsometer analog watch for K1,500. Our Forsining skeleton watch is K200, with free delivery in our free zones once it arrives.</p>
+              <div class="bars" role="img" aria-label="Price: Stepwise Ventures K200, Jacks of PNG K1,500">
+                <div class="bar-row us"><span class="lbl">Stepwise Ventures</span><div class="track"><div class="fill us" style="width:13.33%"></div></div><b>K200</b></div>
+                <div class="bar-row"><span class="lbl">Jacks of PNG</span><div class="track"><div class="fill" style="width:100%"></div></div><b>K1,500</b></div>
+              </div>
+              <p class="note">Price per watch in kina. Jacks of PNG's watch is a different model, shown as a price reference.</p>
+            </div>
+            <a class="btn primary" href="https://wa.me/67582972438?text=Hello%20Stepwise%20Ventures%2C%20please%20tell%20me%20when%20the%20Forsining%20skeleton%20watch%20is%20available." target="_blank" rel="noopener">Ask when it arrives</a>
+          </div>
+        </article>
+      </div>
+      <p class="note">Free delivery to Vision City and Waigani Central on all products.</p>
+    </div>
+  </section>
+
+  <section id="order" style="background: var(--surface); border-block: 1px solid var(--line);">
+    <div class="wrap">
+      <p class="eyebrow">Order</p>
+      <h2>Place your order</h2>
+
+      <div class="builder">
+        <div>
+          <h3>Your order</h3>
+          <p class="small">Choose your items, delivery and payment. Then tap Send order on WhatsApp and press send in WhatsApp.</p>
+          <div class="fields">
+            <label for="f-name">Your name
+              <input id="f-name" type="text" placeholder="e.g. Mary" autocomplete="name">
+            </label>
+            <fieldset class="picker">
+              <legend>Choose your items</legend>
+              <button class="opt big" id="btn-cards" type="button" aria-expanded="false" aria-controls="sub-type">Products</button>
+              <div id="sub-type" hidden>
+                <p class="hint">Choose a product</p>
+                <div class="seg" id="seg-type">
+                  <button class="opt" type="button" data-type="rfid" aria-pressed="false">RFID wallet<small>Black, K50</small></button>
+                  <button class="opt" type="button" data-type="metal" aria-pressed="false">Executive card holder<small>Maroon or blue, K15</small></button>
+                  <div id="sub-colour" class="sub-in" hidden>
+                    <p class="hint">Choose a colour</p>
+                    <div class="seg" id="seg-colour">
+                      <button class="opt" type="button" data-colour="maroon" aria-pressed="false">Maroon</button>
+                      <button class="opt" type="button" data-colour="blue" aria-pressed="false">Blue</button>
+                    </div>
+                  </div>
+                  <button class="opt" type="button" data-type="slim" aria-pressed="false">Slim card holder<small>Black, K15</small></button>
+                  <button class="opt" type="button" data-type="sofa" aria-pressed="false">Inflatable sofa and ottoman<small>K150</small></button>
+                  <button class="opt" type="button" data-type="bagbrown" aria-pressed="false">Tote bag, brown<small>K35</small></button>
+                  <button class="opt" type="button" data-type="bagblack" aria-pressed="false">Tote bag, black<small>K35</small></button>
+                </div>
+              </div>
+              <div id="sub-qty" hidden>
+                <p class="hint" id="p-line"></p>
+                <div class="seg">
+                  <div class="stepper" role="group" aria-label="How many">
+                    <button type="button" id="q-minus" aria-label="Fewer">&minus;</button>
+                    <input id="p-qty" type="text" inputmode="numeric" value="1" readonly aria-live="polite">
+                    <button type="button" id="q-plus" aria-label="More">+</button>
+                  </div>
+                  <button class="btn primary sm" id="p-add" type="button">Add to cart</button>
+                </div>
+              </div>
+              <ul class="cart" id="cart" aria-live="polite"></ul>
+            </fieldset>
+            <label for="f-area">Delivery area
+              <select id="f-area">
+                <option value="Vision City">Vision City (free)</option>
+                <option value="Waigani Central">Waigani Central (free)</option>
+                <option value="other">Somewhere else (ask us)</option>
+                <option value="pickup">I will collect (suggest a place)</option>
+              </select>
+            </label>
+            <label for="f-place" id="l-place" hidden>Where would you like to collect?
+              <input id="f-place" type="text" placeholder="e.g. Waigani Drive, near the market">
+            </label>
+            <label for="f-pay">Payment
+              <select id="f-pay">
+                <option value="cash on delivery">Cash (on delivery or pickup)</option>
+                <option value="bank transfer">Bank transfer</option>
+              </select>
+            </label>
+            <label for="f-bank" id="l-bank" hidden>Which bank will you use?
+              <select id="f-bank">
+                <option value="BSP">BSP</option>
+                <option value="Credit Bank">Credit Bank</option>
+                <option value="Tisa Bank">Tisa Bank</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="out">
+          <div class="total"><span>Order total</span><b id="total">K50</b></div>
+          <p class="small" id="deliv-note"></p>
+          <div class="bank" id="bank" hidden aria-live="polite">
+            <h4>Pay by bank transfer</h4>
+            <dl id="bank-list"></dl>
+            <p class="small" id="bank-note"></p>
+            <button class="copy" id="bank-copy" type="button" hidden>Copy account number</button>
+          </div>
+          <label for="msg">Your message
+            <textarea id="msg" readonly></textarea>
+          </label>
+          <div class="cta">
+            <a class="btn primary" id="wa" href="https://wa.me/67582972438" target="_blank" rel="noopener">Send order on WhatsApp</a>
+          </div>
+          <p class="status" id="status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="background: var(--surface); border-top: 1px solid var(--line);">
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <h2>Talk to us.</h2>
+      <p class="lead">WhatsApp is the fastest way to reach us.</p>
+      <div class="contact-list">
+        <a class="c-row" href="https://wa.me/67582972438" target="_blank" rel="noopener">
+          <span class="c-ico wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.200zm4.500-6.100c-.2-.1-1.500-.7-1.700-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.700 6.700 0 0 1-3.300-2.900c-.2-.4.200-.4.700-1.300.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.200c0 1.300.9 2.500 1 2.700.1.200 1.800 2.800 4.400 3.900 1.600.7 2.300.7 3.100.6.500-.1 1.500-.6 1.700-1.200.2-.6.2-1.100.2-1.200-.1-.1-.3-.2-.6-.3z"/></svg></span><span class="c-txt"><b>WhatsApp</b><small>82972438</small></span>
+        </a>
+        <a class="c-row" href="tel:+67582972438">
+          <span class="c-ico ph"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.600 10.800a15 15 0 0 0 6.600 6.600l2.200-2.200a1 1 0 0 1 1-.25 11.400 11.400 0 0 0 3.600.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.500a1 1 0 0 1 1 1c0 1.300.2 2.500.6 3.600a1 1 0 0 1-.25 1z"/></svg></span><span class="c-txt"><b>Call us</b><small>82972438</small></span>
+        </a>
+        <a class="c-row" href="mailto:stepwiseventures@outlook.com">
+          <span class="c-ico ml"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.200L4.500 7v.1L12 12.600 19.500 7.100V7L12 12.200z"/></svg></span><span class="c-txt"><b>Email</b><small>stepwiseventures@outlook.com</small></span>
+        </a>
+      </div>
+      <h3 class="c-head">Follow us</h3>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/share/1Do7n1ezng/" target="_blank" rel="noopener" aria-label="Facebook: Stepwise Ventures"><span class="c-ico fb"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.500 22v-8.200h2.800l.4-3.300h-3.200V8.400c0-.9.300-1.600 1.600-1.600h1.700V3.900c-.3 0-1.300-.1-2.400-.1-2.500 0-4.200 1.500-4.200 4.300v2.400H7.400v3.300h2.800V22z"/></svg></span><small>Facebook</small></a>
+        <a href="https://www.instagram.com/stepwise.ventures" target="_blank" rel="noopener" aria-label="Instagram: stepwise.ventures"><span class="c-ico ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.500" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.200" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.200" cy="6.800" r="1.200" fill="currentColor"/></svg></span><small>Instagram</small></a>
+        <a href="https://www.tiktok.com/@stepwise.ventures" target="_blank" rel="noopener" aria-label="TikTok: stepwise.ventures"><span class="c-ico tt"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.600 3h-3.100v12.300a2.700 2.700 0 1 1-2.700-2.700c.3 0 .5 0 .8.1V9.500a5.900 5.900 0 1 0 5 5.800V9a7.500 7.500 0 0 0 4.200 1.300V7.200A4.300 4.300 0 0 1 16.600 3z"/></svg></span><small>TikTok</small></a>
+        <a href="https://www.threads.com/@stepwise.ventures" target="_blank" rel="noopener" aria-label="Threads: stepwise.ventures"><span class="c-ico th"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M17.800 10.500c-.5-3-2.300-4.500-5.600-4.500-3.600 0-5.700 2.200-5.700 6s2.100 6 5.700 6c3 0 4.800-1.500 4.800-3.600 0-2.200-1.900-3.200-4.400-3.200-1.800 0-2.900.8-2.900 1.900 0 1 .8 1.700 2.100 1.700 2.400 0 3.600-1.800 3.600-4.600"/></svg></span><small>Threads</small></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Enlarged photo" hidden>
+  <button class="zoom-close" id="zoom-close" type="button" aria-label="Close photo">&times;</button>
+  <button class="zoom-nav prev" id="zoom-prev" type="button" aria-label="Previous photo">&lsaquo;</button>
+  <img id="zoom-img" alt="">
+  <button class="zoom-nav next" id="zoom-next" type="button" aria-label="Next photo">&rsaquo;</button>
+  <p id="zoom-cap"></p>
+  <div class="zoom-dots" id="zoom-dots" aria-hidden="true"></div>
+</div>
+
+<a class="wa-fab" href="#order" aria-label="Go to order form">Order now</a>
+
+<footer>
+  <div class="wrap">
+    <span>Stepwise Ventures, Port Moresby</span>
+    <span>Growing one step at a time</span>
+    <a href="lending.html">Asset-secured loans (coming soon)</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var PRICE = 50;
+  var $ = function (id) { return document.getElementById(id); };
+  var name = $("f-name"), area = $("f-area"), pay = $("f-pay");
+  var place = $("f-place"), bankSel = $("f-bank"), placeLabel = $("l-place"), bankLabel = $("l-bank");
+  var CATALOG = {
+    rfid:  { price: 50, name: "black Dienqi RFID wallet" },
+    metal: { price: 15, name: "executive business card holder" },
+    sofa:  { price: 150, name: "inflatable air sofa chair with ottoman" },
+    bagbrown: { price: 35, name: "brown woven-look tote bag" },
+    bagblack: { price: 35, name: "black woven-look tote bag" },
+    slim:  { price: 15, name: "slim black card holder" },
+    watch: { price: 200, name: "Forsining skeleton mechanical watch" }
+  };
+  var cart = [];
+  var sel = { type: "", colour: "" };
+  var subType = $("sub-type"), subColour = $("sub-colour"), subQty = $("sub-qty"), qtySel = $("p-qty");
+  function stepQty(d) { var n = (parseInt(qtySel.value, 10) || 1) + d; qtySel.value = String(Math.max(1, Math.min(99, n))); }
+  $("q-minus").addEventListener("click", function () { stepQty(-1); });
+  $("q-plus").addEventListener("click", function () { stepQty(1); });
+
+  function pressed(container, attr, val) {
+    Array.prototype.forEach.call(container.querySelectorAll("button"), function (b) {
+      b.setAttribute("aria-pressed", String(!!val && b.getAttribute(attr) === val));
+    });
+  }
+  function selLabel() {
+    if (sel.type === "rfid") return "Black RFID wallet";
+    if (sel.type === "slim") return "Slim black card holder";
+    if (sel.type === "bagbrown") return "Brown tote bag";
+    if (sel.type === "bagblack") return "Black tote bag";
+    if (sel.type === "sofa") return "Inflatable sofa and ottoman set";
+    if (sel.type === "watch") return "Forsining skeleton watch";
+    if (sel.type === "metal" && sel.colour) return sel.colour.charAt(0).toUpperCase() + sel.colour.slice(1) + " executive card holder";
+    return "";
+  }
+  function refreshPicker() {
+    subColour.hidden = sel.type !== "metal";
+    var ready = sel.type === "rfid" || sel.type === "slim" || sel.type === "sofa" || sel.type === "bagbrown" || sel.type === "bagblack" || sel.type === "watch" || (sel.type === "metal" && !!sel.colour);
+    subQty.hidden = !ready;
+    pressed($("seg-type"), "data-type", sel.type);
+    pressed($("seg-colour"), "data-colour", sel.type === "metal" ? sel.colour : "");
+    if (ready) $("p-line").textContent = selLabel() + ", K" + CATALOG[sel.type].price + " each" + (sel.type === "sofa" ? ". Tell us your colour on WhatsApp." : "") + (sel.type === "watch" ? ". Pay first, then we place your order. Delivery 3 to 4 weeks." : "");
+  }
+  function renderCart() {
+    var ul = $("cart");
+    ul.textContent = "";
+    if (!cart.length) {
+      var e0 = document.createElement("li");
+      e0.className = "empty";
+      e0.textContent = "Your cart is empty. Press Products to start.";
+      ul.appendChild(e0);
+      return;
+    }
+    cart.forEach(function (c) {
+      var li = document.createElement("li"), t = document.createElement("span"), rm = document.createElement("button");
+      var ctl = document.createElement("div"), mi = document.createElement("button"), n = document.createElement("span"), pl = document.createElement("button");
+      t.className = "c-name"; t.textContent = c.label + " (K" + (c.qty * c.price) + ")";
+      rm.type = "button"; rm.className = "copy"; rm.textContent = "Remove"; rm.setAttribute("data-remove", c.key);
+      rm.setAttribute("aria-label", "Remove " + c.label);
+      ctl.className = "stepper sm";
+      mi.type = "button"; mi.textContent = "−"; mi.setAttribute("data-adj", c.key + "|-1"); mi.setAttribute("aria-label", "One fewer " + c.label);
+      pl.type = "button"; pl.textContent = "+"; pl.setAttribute("data-adj", c.key + "|1"); pl.setAttribute("aria-label", "One more " + c.label);
+      n.className = "q-n"; n.textContent = c.qty;
+      ctl.appendChild(mi); ctl.appendChild(n); ctl.appendChild(pl);
+      li.appendChild(t); li.appendChild(ctl); li.appendChild(rm); ul.appendChild(li);
+    });
+  }
+  $("btn-cards").addEventListener("click", function () {
+    var opening = subType.hidden;
+    subType.hidden = !opening;
+    this.setAttribute("aria-expanded", String(opening));
+    if (!opening) sel = { type: "", colour: "" };
+    refreshPicker();
+  });
+  $("seg-type").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b || !b.hasAttribute("data-type")) return;
+    sel.type = b.getAttribute("data-type"); sel.colour = ""; refreshPicker();
+  });
+  $("seg-colour").addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    sel.colour = b.getAttribute("data-colour"); refreshPicker();
+  });
+  $("p-add").addEventListener("click", function () {
+    var q = parseInt(qtySel.value, 10) || 1, def = CATALOG[sel.type];
+    if (!def) return;
+    var key = sel.type + ":" + (sel.type === "metal" ? sel.colour : "black");
+    var nm = sel.type === "metal" ? sel.colour + " " + def.name : def.name;
+    var found = cart.filter(function (c) { return c.key === key; })[0];
+    if (found) found.qty += q; else cart.push({ key: key, label: selLabel(), name: nm, price: def.price, qty: q });
+    sel = { type: "", colour: "" }; qtySel.value = "1";
+    refreshPicker(); build();
+    status.textContent = "Added to your cart.";
+  });
+  $("cart").addEventListener("click", function (e) {
+    var a = e.target.closest("button[data-adj]");
+    if (a) {
+      var pr = a.getAttribute("data-adj").split("|");
+      cart.forEach(function (c) { if (c.key === pr[0]) c.qty = Math.max(1, Math.min(99, c.qty + parseInt(pr[1], 10))); });
+      build(); return;
+    }
+    var b = e.target.closest("button[data-remove]"); if (!b) return;
+    cart = cart.filter(function (c) { return c.key !== b.getAttribute("data-remove"); });
+    build();
+  });
+  var msg = $("msg"), wa = $("wa"), total = $("total"), note = $("deliv-note"), status = $("status");
+
+  function build() {
+    var parts = [], sum = 0, count = 0;
+    cart.forEach(function (c) {
+      sum += c.qty * c.price; count += c.qty;
+      parts.push(c.qty + " x " + c.name + " (K" + (c.qty * c.price) + ")");
+    });
+    renderCart();
+    var other = area.value === "other";
+    var pickup = area.value === "pickup";
+    var who = name.value.trim();
+    var spot = place.value.trim();
+    placeLabel.hidden = !pickup;
+    bankLabel.hidden = !bankOn();
+    total.textContent = "K" + sum;
+    note.textContent = pickup
+      ? "Pickup is arranged by message. We will tell you if your place works."
+      : other
+        ? "Delivery outside Vision City and Waigani Central is not free. We will confirm a fee or a pickup point."
+        : "";
+    var lines = [count
+      ? "Hello Stepwise Ventures, I would like to order:\n" + parts.join("\n") + "\nTotal: K" + sum + "."
+      : "Hello Stepwise Ventures, I would like to place an order. (Choose your items first.)"];
+    if (pickup) lines.push("I would like to collect my order at " + (spot || "____") + ". Is that possible?");
+    else if (other) lines.push("My delivery area is: ____. Please confirm the delivery fee or a pickup point.");
+    else lines.push("Delivery: " + area.value + " (free).");
+    if (cart.some(function (c) { return c.key.indexOf("sofa") === 0; })) lines.push("Sofa set: please confirm which colours are in stock, and I will tell you my choice.");
+    if (cart.some(function (c) { return c.key.indexOf("watch") === 0; })) lines.push("Watch: I understand I pay first, then you place the order, and delivery takes 3 to 4 weeks.");
+    lines.push(bankOn()
+      ? "Hi, I will pay by " + bankSel.value + " transfer. Please send your account details, and I will send proof of payment once I have paid."
+      : "Payment: cash.");
+    if (who) lines.push("Name: " + who);
+    var text = lines.join("\n");
+    msg.value = text;
+    wa.href = "https://wa.me/67582972438?text=" + encodeURIComponent(text);
+    renderBank();
+  }
+
+  /* Fill in accountName, accountNumber and branch to show bank details automatically. */
+  var BANKS = {
+    "BSP":         { bank: "BSP",         accountName: "Stepwise Ventures", accountNumber: "0001637857", bsb: "202" },
+    "Credit Bank": { bank: "Credit Bank", accountName: "Stepwise Ventures", accountNumber: "20009505",   bsb: "001" },
+    "Tisa Bank":   { bank: "Tisa Bank",   accountName: "Stepwise Ventures", accountNumber: "0010295034", bsb: "001" }
+  };
+  function curBank() { return BANKS[bankSel.value] || BANKS["BSP"]; }
+  function bankOn() { return pay.value === "bank transfer"; }
+  function renderBank() {
+    var box = $("bank"), list = $("bank-list"), noteEl = $("bank-note"), btn = $("bank-copy");
+    box.hidden = !bankOn();
+    if (!bankOn()) return;
+    list.textContent = "";
+    var BANK = curBank(), has = !!BANK.accountNumber;
+    if (has) {
+      [["Bank", BANK.bank], ["Account name", BANK.accountName], ["Account number", BANK.accountNumber],
+       ["BSB", BANK.bsb], ["Reference", name.value.trim() || "your name"]].forEach(function (r) {
+        if (!r[1]) return;
+        var dt = document.createElement("dt"), dd = document.createElement("dd");
+        dt.textContent = r[0]; dd.textContent = r[1];
+        list.appendChild(dt); list.appendChild(dd);
+      });
+    }
+    noteEl.textContent = has
+      ? "Use your name as the payment reference, then send your proof of payment on WhatsApp."
+      : "We send our account details on WhatsApp when we confirm your order. Send your proof of payment there.";
+    btn.hidden = !has;
+  }
+
+  function copyText(text, el) {
+    function fallback() {
+      var t = document.createElement("textarea");
+      t.value = text; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+      document.body.appendChild(t); t.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(t);
+      return ok;
+    }
+    function done(ok) { status.textContent = ok ? "Copied. Paste it into WhatsApp." : "Could not copy. Select the text and copy it by hand."; }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(fallback()); });
+    } else { done(fallback()); }
+  }
+
+  [name, area, pay, place, bankSel].forEach(function (el) { el.addEventListener("input", build); el.addEventListener("change", build); });
+  $("bank-copy").addEventListener("click", function () { copyText(curBank().accountNumber); });
+  Array.prototype.forEach.call(document.querySelectorAll(".copy"), function (b) {
+    b.addEventListener("click", function () {
+      var orig = b.textContent;
+      copyText(b.getAttribute("data-copy"));
+      b.textContent = "Copied";
+      setTimeout(function () { b.textContent = orig; }, 1600);
+    });
+  });
+  build();
+})();
+
+  var g = function (id) { return document.getElementById(id); };
+  var zoom = g("zoom"), zoomImg = g("zoom-img"), zoomCap = g("zoom-cap"), zoomDots = g("zoom-dots");
+  var gal = [], gi = 0, busy = false, reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function show() {
+    var it = gal[gi]; zoomImg.src = it.src; zoomImg.alt = it.alt; zoomCap.textContent = it.alt;
+    Array.prototype.forEach.call(zoomDots.children, function (d, i) { d.className = i === gi ? "on" : ""; });
+    g("zoom-prev").hidden = g("zoom-next").hidden = gal.length < 2;
+  }
+  function openZoom(img) {
+    var card = img.closest(".pcard"), seen = {}; gal = [];
+    Array.prototype.forEach.call(card.querySelectorAll("img"), function (im) {
+      var u = im.currentSrc || im.src; if (seen[u]) return; seen[u] = 1; gal.push({ src: u, alt: im.alt });
+    });
+    var u0 = img.currentSrc || img.src; gi = Math.max(0, gal.map(function (x) { return x.src; }).indexOf(u0));
+    zoomDots.textContent = "";
+    gal.forEach(function () { zoomDots.appendChild(document.createElement("i")); });
+    show(); zoom.hidden = false; document.body.style.overflow = "hidden"; g("zoom-close").focus();
+  }
+  function closeZoom() { zoom.hidden = true; zoomImg.removeAttribute("src"); document.body.style.overflow = ""; }
+  function go(dir) {
+    if (busy || gal.length < 2) return;
+    var next = (gi + dir + gal.length) % gal.length;
+    if (reduce) { gi = next; show(); return; }
+    busy = true;
+    var out = zoomImg.animate([{ transform: zoomImg.style.transform || "translateX(0)", opacity: 1 }, { transform: "translateX(" + (-dir * 70) + "px)", opacity: 0 }], { duration: 160, easing: "ease-in", fill: "forwards" });
+    out.onfinish = function () {
+      gi = next; show(); out.cancel(); zoomImg.style.transform = "";
+      var inn = zoomImg.animate([{ transform: "translateX(" + (dir * 70) + "px)", opacity: 0 }, { transform: "translateX(0)", opacity: 1 }], { duration: 220, easing: "ease-out" });
+      inn.onfinish = function () { busy = false; };
+    };
+  }
+  g("zoom-close").addEventListener("click", closeZoom);
+  g("zoom-prev").addEventListener("click", function () { go(-1); });
+  g("zoom-next").addEventListener("click", function () { go(1); });
+  zoom.addEventListener("click", function (e) { if (e.target === zoom) closeZoom(); });
+  document.addEventListener("keydown", function (e) {
+    if (zoom.hidden) return;
+    if (e.key === "Escape") closeZoom(); else if (e.key === "ArrowLeft") go(-1); else if (e.key === "ArrowRight") go(1);
+  });
+  var tx = 0, ty = 0, dx = 0, dragging = false;
+  zoom.addEventListener("touchstart", function (e) { if (e.touches.length !== 1 || busy) return; tx = e.touches[0].clientX; ty = e.touches[0].clientY; dx = 0; dragging = true; }, { passive: true });
+  zoom.addEventListener("touchmove", function (e) {
+    if (!dragging) return;
+    dx = e.touches[0].clientX - tx;
+    if (Math.abs(dx) > Math.abs(e.touches[0].clientY - ty)) zoomImg.style.transform = "translateX(" + dx + "px)";
+  }, { passive: true });
+  zoom.addEventListener("touchend", function () {
+    if (!dragging) return; dragging = false;
+    if (Math.abs(dx) > 50) { go(dx < 0 ? 1 : -1); }
+    else if (dx) { zoomImg.animate([{ transform: "translateX(" + dx + "px)" }, { transform: "translateX(0)" }], { duration: 160, easing: "ease-out" }); zoomImg.style.transform = ""; }
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".mini img"), function (im) {
+    im.addEventListener("click", function () { openZoom(im); });
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll(".ptoggle"), function (b) {
+    b.addEventListener("click", function (ev) {
+      if (ev.target.tagName === "IMG") { openZoom(ev.target); return; }
+      var d = document.getElementById(b.getAttribute("aria-controls")), open = d.hidden;
+      d.hidden = !open; b.setAttribute("aria-expanded", String(open));
+    });
+  });
+
+  (function () {
+    var fab = document.querySelector(".wa-fab"), ord = document.getElementById("order");
+    if (!fab || !ord || !("IntersectionObserver" in window)) return;
+    new IntersectionObserver(function (en) { fab.hidden = en[0].isIntersecting; }, { threshold: 0.05 }).observe(ord);
+  })();
+</script>
+<script>
+if ("serviceWorker" in navigator) { window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); }); }
+</script>
+</body>
+</html>

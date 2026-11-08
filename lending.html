@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12161b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Stepwise Ventures Loans</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: one long page that climbs. Hero with logo, price proof, product, an ordering staircase, contact. */
+:root {
+  --bg: #F6F4EE;
+  --surface: #FFFFFF;
+  --surface-2: #EDEAE0;
+  --fg: #17181B;
+  --muted: #5D5C56;
+  --line: #D9D5C8;
+  --gold: #8F6200;
+  --gold-soft: #F3E3B8;
+  --blue: #0A6FB0;
+  --on-gold: #FFFFFF;
+  --cover-bg: #12161b;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E0F12;
+    --surface: #17191E;
+    --surface-2: #1F2228;
+    --fg: #F3F1EA;
+    --muted: #A9A79E;
+    --line: #2A2D35;
+    --gold: #E8B93F;
+    --gold-soft: #3A2F12;
+    --blue: #35AEF2;
+    --on-gold: #1A1405;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E0F12;
+  --surface: #17191E;
+  --surface-2: #1F2228;
+  --fg: #F3F1EA;
+  --muted: #A9A79E;
+  --line: #2A2D35;
+  --gold: #E8B93F;
+  --gold-soft: #3A2F12;
+  --blue: #35AEF2;
+  --on-gold: #1A1405;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.6; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { width: 100%; max-width: 1080px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+section { padding-block: 36px; }
+.eyebrow { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+h2 { font-size: clamp(1.7rem, 4.5vw, 2.4rem); font-weight: 800; margin-bottom: 10px; }
+.lead { color: var(--muted); max-width: 60ch; }
+
+/* header */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; font-size: 1.1rem; text-decoration: none; }
+.brand img { width: 36px; height: 36px; border-radius: 50%; }
+nav { display: flex; gap: 20px; flex-wrap: wrap; }
+nav a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.95rem; }
+nav a:hover { color: var(--fg); }
+
+/* cover */
+.cover { background: var(--cover-bg); }
+.cover img { display: block; margin-inline: auto; width: auto; max-width: 100%; height: auto; max-height: 480px; object-fit: contain;
+  -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 62%, transparent 100%);
+  mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 62%, transparent 100%); }
+
+/* hero */
+.hero { padding-block: 44px 56px; }
+.hero-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+.hero h1 { font-size: clamp(2.3rem, 7vw, 4rem); font-weight: 800; margin-bottom: 18px; }
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero p.sub { font-size: 1.1rem; color: var(--muted); max-width: 46ch; margin-bottom: 26px; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 22px; border-radius: 999px; font-weight: 700; font-family: var(--body); font-size: 1rem; text-decoration: none; cursor: pointer; border: 2px solid var(--gold); transition: transform .15s ease; }
+.btn:hover { transform: translateY(-2px); }
+.btn.primary { background: var(--gold); color: var(--on-gold); }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+
+/* price proof */
+.proof { background: var(--surface); border-block: 1px solid var(--line); }
+.proof-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 40px; align-items: center; }
+.bars { display: grid; gap: 14px; }
+.bar-row { display: grid; grid-template-columns: 120px 1fr 64px; gap: 12px; align-items: center; font-size: 0.95rem; }
+.bar-row .lbl { color: var(--muted); }
+.track { height: 18px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+.fill { height: 100%; border-radius: 999px; background: var(--muted); }
+.fill.us { background: var(--gold); }
+.bar-row b { font-family: var(--display); font-size: 1.1rem; text-align: right; font-variant-numeric: tabular-nums; }
+.bar-row.us .lbl { color: var(--fg); font-weight: 700; }
+.note { font-size: 0.85rem; color: var(--muted); margin-top: 14px; }
+
+/* product */
+.prod-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.stage { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; overflow: hidden; min-width: 0; }
+.stage img { display: block; width: 100%; height: auto; }
+.gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+.gallery figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; min-width: 0; }
+.gallery img { display: block; width: 100%; height: 180px; object-fit: cover; }
+.gallery figcaption { padding: 14px 16px 16px; font-size: 0.93rem; color: var(--muted); }
+.gallery figcaption b { display: block; color: var(--fg); font-family: var(--display); font-size: 1.05rem; margin-bottom: 2px; }
+.price { font-family: var(--display); font-weight: 800; font-size: 3rem; line-height: 1; margin: 6px 0 18px; }
+.price small { font-size: 1rem; font-weight: 500; color: var(--muted); font-family: var(--body); margin-left: 8px; }
+.specs { width: 100%; border-collapse: collapse; margin-bottom: 22px; }
+.specs th, .specs td { text-align: left; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 0.97rem; vertical-align: top; }
+.specs th { color: var(--muted); font-weight: 500; width: 40%; padding-right: 16px; }
+
+/* ordering staircase */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: end; margin-top: 28px; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; border-top: 4px solid var(--gold); }
+.step:nth-child(1) { min-height: 150px; }
+.step:nth-child(2) { min-height: 190px; }
+.step:nth-child(3) { min-height: 230px; }
+.step .n { font-family: var(--display); font-weight: 800; font-size: 1.6rem; color: var(--gold); margin-bottom: 6px; }
+.step h3 { font-size: 1.2rem; margin-bottom: 6px; }
+.step p { color: var(--muted); font-size: 0.95rem; }
+
+/* message builder */
+.builder { margin-top: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.builder h3 { font-size: 1.4rem; margin-bottom: 6px; }
+.fields { display: grid; gap: 14px; margin-top: 16px; }
+label { display: grid; gap: 6px; font-size: 0.88rem; font-weight: 700; }
+input, select, textarea { font-family: var(--body); font-size: 1rem; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; min-height: 46px; width: 100%; }
+textarea { min-height: 150px; resize: vertical; line-height: 1.5; }
+.total { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-top: 1px solid var(--line); margin-top: 4px; }
+.total b { font-family: var(--display); font-size: 1.6rem; font-variant-numeric: tabular-nums; }
+.out { display: grid; gap: 12px; align-content: start; }
+.status { min-height: 1.4em; font-size: 0.9rem; color: var(--blue); font-weight: 700; }
+.small { font-size: 0.85rem; color: var(--muted); }
+
+.bank { border: 1px solid var(--gold); background: var(--gold-soft); border-radius: 14px; padding: 16px; display: grid; gap: 10px; }
+.bank h4 { margin: 0; font-family: var(--display); font-size: 1.05rem; }
+.bank dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 0.95rem; }
+.bank dt { color: var(--muted); }
+.bank dd { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+
+.items { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; min-width: 0; }
+.items legend { font-size: 0.88rem; font-weight: 700; padding: 0; margin-bottom: 4px; }
+label.item { grid-template-columns: 1fr 88px; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); font-weight: 500; }
+label.item b { display: block; font-size: 0.95rem; }
+label.item small { color: var(--muted); font-size: 0.85rem; }
+label.item select { min-height: 40px; padding: 8px 10px; }
+
+.picker { border: 0; padding: 0; margin: 0; display: grid; gap: 12px; min-width: 0; }
+.picker legend { font-size: 0.88rem; font-weight: 700; padding: 0; margin-bottom: 4px; }
+.opt { font-family: var(--body); font-size: 0.95rem; font-weight: 700; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; min-height: 46px; cursor: pointer; text-align: left; display: inline-flex; flex-direction: column; justify-content: center; }
+.opt small { color: var(--muted); font-weight: 500; font-size: 0.8rem; }
+.opt:hover { border-color: var(--gold); }
+.opt[aria-pressed="true"], .opt[aria-expanded="true"] { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+.opt[aria-pressed="true"] small, .opt[aria-expanded="true"] small { color: var(--on-gold); }
+.opt.big { width: 100%; flex-direction: row; align-items: center; justify-content: space-between; font-size: 1.05rem; min-height: 52px; }
+.opt.big::after { content: "+"; font-size: 1.4rem; line-height: 1; }
+.opt.big[aria-expanded="true"]::after { content: "\2013"; }
+.seg { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.seg .opt { flex: 1 1 150px; }
+.seg select { width: 92px; }
+.hint { font-size: 0.85rem; color: var(--muted); margin: 0 0 6px; }
+.btn.sm { min-height: 44px; padding: 0 18px; font-size: 0.95rem; }
+.cart { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.cart li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); font-size: 0.95rem; }
+.cart li.empty { color: var(--muted); border-style: dashed; }
+
+.pcards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 14px; align-items: start; }
+.pcard { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; min-width: 0; }
+.ptoggle { all: unset; box-sizing: border-box; display: block; width: 100%; cursor: pointer; }
+.ptoggle:focus-visible { outline: 3px solid var(--gold); outline-offset: -3px; }
+.ptoggle img { display: block; width: 100%; height: 200px; object-fit: cover; }
+#cardholder .ptoggle img { height: auto; aspect-ratio: 648 / 360; }
+.pmeta { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 14px 18px 2px; font-family: var(--display); font-size: 1.1rem; }
+.pp { font-weight: 800; font-size: 1.4rem; }
+.ptap { display: block; padding: 0 18px 16px; color: var(--gold); font-size: 0.88rem; font-weight: 600; }
+.ptap::after { content: " +"; }
+.ptoggle[aria-expanded="true"] .ptap::after { content: " \2013"; }
+.soon { display: inline-block; margin: 6px 18px 0; padding: 4px 12px; border-radius: 999px; background: var(--gold); color: var(--on-gold); font-size: 0.8rem; font-weight: 700; }
+.pdetail { padding: 10px 16px 14px; border-top: 1px solid var(--line); }
+.pdetail .specs { margin: 6px 0 12px; }
+.pdetail .specs th, .pdetail .specs td { padding: 6px 0; font-size: 0.9rem; line-height: 1.3; }
+.pdetail .specs th { width: 36%; padding-right: 10px; }
+.pdetail .lead { font-size: 0.93rem; line-height: 1.4; margin-bottom: 6px !important; }
+.pdetail .btn { min-height: 44px; padding: 0 20px; }
+.mini { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 0 0 12px; }
+.mini.two { grid-template-columns: repeat(2, 1fr); }
+.mini figure { margin: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; min-width: 0; }
+.mini img { display: block; width: 100%; height: 84px; object-fit: cover; }
+.mini figcaption { padding: 6px 8px 8px; font-size: 0.75rem; line-height: 1.3; color: var(--muted); }
+.mini figcaption b { display: block; color: var(--fg); font-size: 0.85rem; }
+@media (max-width: 760px) { .pcards { grid-template-columns: 1fr; } .mini { grid-template-columns: repeat(3, 1fr); } .mini.two { grid-template-columns: 1fr 1fr; } }
+
+.pricecheck { margin: 4px 0 12px; padding: 10px 12px; background: var(--bg); border: 1px solid var(--line); border-radius: 14px; }
+.pricecheck .bars { gap: 8px; }
+.pricecheck .bar-row { grid-template-columns: 92px 1fr 52px; gap: 8px; font-size: 0.85rem; }
+.pricecheck .bar-row b { font-size: 1rem; }
+.pricecheck .note { font-size: 0.8rem; margin-top: 8px; }
+.pricecheck h3 { font-family: var(--display); font-size: 1.05rem; margin: 0 0 6px; }
+
+.wa-fab { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom)); z-index: 20; display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 20px; border-radius: 999px; background: #1E8E4E; color: #fff; font-weight: 700; text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+.wa-fab:hover { background: #17753f; }
+@media print { .wa-fab { display: none; } }
+.contact-list { display: grid; gap: 12px; margin-top: 22px; max-width: 520px; }
+.c-row { display: flex; align-items: center; gap: 14px; padding: 12px 14px; min-height: 64px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg); text-decoration: none; color: var(--fg); }
+.c-row:hover { border-color: var(--gold); }
+.c-txt { display: grid; min-width: 0; }
+.c-txt b { font-family: var(--display); font-size: 1.05rem; }
+.c-txt small { color: var(--muted); font-size: 0.92rem; overflow-wrap: anywhere; }
+.c-ico { flex: 0 0 auto; width: 44px; height: 44px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #fff; }
+.c-ico svg { width: 24px; height: 24px; }
+.c-ico.wa { background: #1E8E4E; } .c-ico.ph { background: #0A6FB0; } .c-ico.ml { background: #8F6200; }
+.c-ico.fb { background: #1877F2; } .c-ico.ig { background: linear-gradient(45deg, #F58529, #DD2A7B 55%, #8134AF); }
+.c-ico.tt { background: #111; } .c-ico.th { background: #222; }
+.c-head { font-family: var(--display); font-size: 1.1rem; margin: 20px 0 10px; }
+.social-icons { display: flex; flex-wrap: wrap; gap: 20px; }
+.social-icons a { display: grid; justify-items: center; gap: 6px; text-decoration: none; color: var(--fg); min-width: 64px; }
+.social-icons .c-ico { width: 54px; height: 54px; }
+.social-icons .c-ico svg { width: 28px; height: 28px; }
+.social-icons a:hover .c-ico { transform: translateY(-2px); }
+.social-icons small { font-size: 0.85rem; color: var(--muted); }
+.ptoggle img, .mini img { cursor: zoom-in; }
+.zoom { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.92); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 56px 12px 24px; }
+.zoom img { max-width: 100%; max-height: calc(100vh - 140px); object-fit: contain; border-radius: 8px; cursor: zoom-out; }
+.zoom p { color: #ddd; font-size: 0.9rem; text-align: center; margin: 0; max-width: 60ch; }
+.zoom-close { position: absolute; top: 10px; right: 12px; width: 48px; height: 48px; border-radius: 50%; border: 0; background: rgba(255,255,255,.15); color: #fff; font-size: 2rem; line-height: 1; cursor: pointer; }
+.zoom-close:hover { background: rgba(255,255,255,.3); }
+.soon-card { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--gold); border-radius: 18px; padding: 18px 18px 20px; }
+.soon-card h2 { margin-bottom: 6px; }
+.loan-steps { margin: 12px 0; padding: 0; list-style: none; counter-reset: ls; display: grid; gap: 8px; }
+.loan-steps li { counter-increment: ls; position: relative; padding-left: 38px; font-size: 0.95rem; color: var(--muted); }
+.loan-steps li::before { content: counter(ls); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; background: var(--gold); color: var(--on-gold); font-weight: 700; font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; }
+.loan-steps b { color: var(--fg); }
+.soon-card .small { margin: 0 0 14px; }
+.nav-loan { color: var(--gold); font-weight: 700; }
+footer a { color: var(--gold); font-weight: 600; }
+/* payments + contact */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
+.chips li { padding: 9px 16px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); font-weight: 500; }
+.chips li.main { background: var(--gold-soft); border-color: var(--gold); color: var(--fg); font-weight: 700; }
+.contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 22px; min-width: 0; }
+.card h3 { font-size: 1.1rem; margin-bottom: 10px; }
+.val { font-family: var(--display); font-weight: 700; font-size: 1.35rem; overflow-wrap: anywhere; user-select: all; margin-bottom: 12px; }
+.val.sm { font-size: 1.05rem; }
+.copy { font-family: var(--body); font-size: 0.9rem; font-weight: 700; color: var(--fg); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; min-height: 40px; cursor: pointer; }
+.copy:hover { border-color: var(--gold); }
+.social { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.social li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+.social span:first-child { color: var(--muted); }
+.social a { color: var(--gold); font-weight: 700; }
+
+footer { border-top: 1px solid var(--line); padding-block: 28px 36px; color: var(--muted); font-size: 0.9rem; }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+@media (max-width: 820px) {
+  section { padding-block: 28px; }
+  .hero-grid, .proof-grid, .prod-grid, .builder { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+  .step:nth-child(n) { min-height: 0; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; }
+  .bar-row { grid-template-columns: 96px 1fr 58px; }
+}
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } .btn:hover { transform: none; } }
+</style>
+</head>
+<body>
+<header class="wrap top">
+  <a class="brand" href="index.html"><img src="logo.png" alt="" width="36" height="36"><span>Stepwise Ventures</span></a>
+  <nav aria-label="Main">
+    <a href="index.html">Shop</a>
+    <a href="lending.html" class="nav-loan" aria-current="page">Loans</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section style="padding-block: 28px 12px;">
+    <div class="wrap">
+      <span class="soon" style="margin: 0 0 8px;">Coming soon</span>
+      <h1 style="font-size: clamp(1.9rem, 4vw, 2.6rem); margin-bottom: 8px;">Asset-secured loans</h1>
+      <p class="lead" style="font-size: 1.05rem;">Stepwise Ventures will soon offer small loans secured by your valuables. Bring in an item, we assess its value, and you receive a loan based on that value.</p>
+    </div>
+  </section>
+  <section style="padding-block: 12px 28px;">
+    <div class="wrap">
+      <div class="soon-card">
+        <h2 style="font-size: 1.4rem;">How it will work</h2>
+        <ol class="loan-steps">
+          <li><b>Bring your valuable.</b> We inspect it and give you a fair valuation.</li>
+          <li><b>Receive your loan.</b> The loan amount is based on the assessed value of your item, and we keep the item safe.</li>
+          <li><b>Repay and collect.</b> Pay back the loan plus the agreed interest, and your item is returned to you.</li>
+        </ol>
+        <p class="small">Loan terms, interest and repayment periods will be explained and agreed in writing before any loan is made. Details will be announced before launch.</p>
+        <a class="btn primary" href="https://wa.me/67582972438?text=Hello%20Stepwise%20Ventures%2C%20please%20tell%20me%20when%20your%20asset-secured%20loans%20start." target="_blank" rel="noopener">Ask to be notified</a>
+        <a class="btn ghost" href="index.html">Back to the shop</a>
+      </div>
+    </div>
+  </section>
+  <section id="contact" style="background: var(--surface); border-top: 1px solid var(--line);">
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <h2>Talk to us.</h2>
+      <p class="lead">WhatsApp is the fastest way to reach us.</p>
+      <div class="contact-list">
+        <a class="c-row" href="https://wa.me/67582972438" target="_blank" rel="noopener">
+          <span class="c-ico wa"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.200zm4.500-6.100c-.2-.1-1.500-.7-1.700-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.700 6.700 0 0 1-3.300-2.900c-.2-.4.200-.4.700-1.300.1-.2 0-.3 0-.5l-.8-1.800c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.200c0 1.300.9 2.500 1 2.700.1.200 1.800 2.800 4.400 3.900 1.600.7 2.300.7 3.100.6.500-.1 1.500-.6 1.700-1.200.2-.6.2-1.100.2-1.200-.1-.1-.3-.2-.6-.3z"/></svg></span><span class="c-txt"><b>WhatsApp</b><small>82972438</small></span>
+        </a>
+        <a class="c-row" href="tel:+67582972438">
+          <span class="c-ico ph"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.600 10.800a15 15 0 0 0 6.600 6.600l2.200-2.200a1 1 0 0 1 1-.25 11.400 11.400 0 0 0 3.600.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.500a1 1 0 0 1 1 1c0 1.300.2 2.500.6 3.600a1 1 0 0 1-.25 1z"/></svg></span><span class="c-txt"><b>Call us</b><small>82972438</small></span>
+        </a>
+        <a class="c-row" href="mailto:stepwiseventures@outlook.com">
+          <span class="c-ico ml"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.200L4.500 7v.1L12 12.600 19.500 7.100V7L12 12.200z"/></svg></span><span class="c-txt"><b>Email</b><small>stepwiseventures@outlook.com</small></span>
+        </a>
+      </div>
+      <h3 class="c-head">Follow us</h3>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/share/1Do7n1ezng/" target="_blank" rel="noopener" aria-label="Facebook: Stepwise Ventures"><span class="c-ico fb"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.500 22v-8.200h2.800l.4-3.300h-3.200V8.400c0-.9.300-1.600 1.600-1.600h1.700V3.900c-.3 0-1.300-.1-2.400-.1-2.500 0-4.200 1.500-4.200 4.300v2.400H7.400v3.300h2.800V22z"/></svg></span><small>Facebook</small></a>
+        <a href="https://www.instagram.com/stepwise.ventures" target="_blank" rel="noopener" aria-label="Instagram: stepwise.ventures"><span class="c-ico ig"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5.500" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.200" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.200" cy="6.800" r="1.200" fill="currentColor"/></svg></span><small>Instagram</small></a>
+        <a href="https://www.tiktok.com/@stepwise.ventures" target="_blank" rel="noopener" aria-label="TikTok: stepwise.ventures"><span class="c-ico tt"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.600 3h-3.100v12.300a2.700 2.700 0 1 1-2.700-2.700c.3 0 .5 0 .8.1V9.500a5.900 5.900 0 1 0 5 5.800V9a7.500 7.500 0 0 0 4.200 1.300V7.200A4.300 4.300 0 0 1 16.600 3z"/></svg></span><small>TikTok</small></a>
+        <a href="https://www.threads.com/@stepwise.ventures" target="_blank" rel="noopener" aria-label="Threads: stepwise.ventures"><span class="c-ico th"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M17.800 10.500c-.5-3-2.300-4.500-5.600-4.500-3.600 0-5.700 2.200-5.700 6s2.100 6 5.700 6c3 0 4.800-1.500 4.800-3.600 0-2.200-1.900-3.200-4.400-3.200-1.800 0-2.900.8-2.900 1.900 0 1 .8 1.700 2.100 1.700 2.400 0 3.600-1.800 3.600-4.600"/></svg></span><small>Threads</small></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Stepwise Ventures, Port Moresby</span>
+    <a href="index.html">Back to the shop</a>
+  </div>
+</footer>
+</body>
+</html>
