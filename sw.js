@@ -1,5 +1,5 @@
-const CACHE = "stepwise-v3";
-const FILES = ["./", "index.html", "lending.html", "manifest.webmanifest", "icon-192.png", "icon-512.png", "bag-black.jpg", "bag-brown.jpg", "bag-main.jpg", "cardholder-open.jpg", "cardholders.jpg", "cover.jpg", "detail-carbon.jpg", "detail-cash.jpg", "detail-slots.jpg", "logo.png", "slim-closed.jpg", "slim-open.jpg", "slim-wide.jpg", "sofa-colours.jpg", "sofa-main.jpg", "sofa-ottoman.jpg", "sofa-valve.jpg", "wallet-main.jpg", "watch-back.jpg", "watch-engraving.jpg", "watch-front.jpg"];
+const CACHE = "stepwise-v4";
+const FILES = ["./", "index.html", "lending.html", "manifest.json", "icon-192.png", "icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(k => Promise.all(k.filter(x => x !== CACHE).map(x => caches.delete(x)))).then(() => self.clients.claim())); });
 self.addEventListener("fetch", e => {
